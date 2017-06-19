@@ -10,13 +10,17 @@ module.exports = function (obj, before) {
     get(target, property, receiver) {
       const cb = target[property]
       const hook = before[property]
-      return (...args) => {
-        if (typeof hook === 'function') {
-          const result = hook.apply(this, args)
-          return cb(result)
-        } else {
-          return cb.apply(this, args)
+      if (typeof cb === 'function') {
+        return (...args) => {
+          if (typeof hook === 'function') {
+            const result = hook.apply(this, args)
+            return cb(result)
+          } else {
+            return cb.apply(this, args)
+          }
         }
+      } else {
+        return cb
       }
     }
   })
