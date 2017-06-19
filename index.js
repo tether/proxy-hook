@@ -8,8 +8,11 @@
 module.exports = function (obj, before) {
   return new Proxy(obj, {
     get(target, property, receiver) {
+      const cb = target[property]
+      const hook = before[property]
       return (...args) => {
-        console.log('youhouuu')
+        const result = hook.apply(this, args)
+        return cb(result)
       }
     }
   })
