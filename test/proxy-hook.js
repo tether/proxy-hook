@@ -49,3 +49,25 @@ test('should not hook a property', assert => {
   assert.equal(typeof api.get, 'string')
   assert.equal(api.get, 'hello')
 })
+
+
+test('should work with multiple functions', assert => {
+  assert.plan(2)
+  const api = hook({
+    get(params) {
+      return params
+    },
+    post(params) {
+      return 'hello ' + params
+    }
+  }, {
+    get() {
+      return 'foo'
+    },
+    post(params) {
+      return params
+    }
+  })
+  assert.equal(api.get(), 'foo')
+  assert.equal(api.post('world'), 'hello world')
+})
