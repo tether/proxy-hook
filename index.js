@@ -9,7 +9,7 @@ module.exports = function (obj, before, after) {
   return new Proxy(obj, {
     get(target, property, receiver) {
       const cb = target[property]
-      const beforeHook = before[property]
+      const beforeHook = before && before[property]
       //const afterHook = after[property]
       if (typeof cb === 'function') {
         return (...args) => {
