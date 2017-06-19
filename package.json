@@ -12,9 +12,11 @@
     "url": "git+https://github.com/tether/proxy-hook.git"
   },
   "keywords": [
+    "hook",
+    "proxy",
     "tether"
   ],
-  "author": "Petrofeed Inc",
+  "author": "Olivier Wietrich",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tether/proxy-hook/issues"
@@ -24,4 +26,3 @@
     "tape": "*"
   }
 }
-  
