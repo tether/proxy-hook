@@ -5,8 +5,12 @@
  * @api public
  */
 
-module.exports = function () {
-  // do something
+module.exports = function (obj, before) {
+  return new Proxy(obj, {
+    get(target, property, receiver) {
+      return (...args) => {
+        console.log('youhouuu')
+      }
+    }
+  })
 }
-
-  

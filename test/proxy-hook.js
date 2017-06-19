@@ -4,10 +4,19 @@
  */
 
 const test = require('tape')
+const hook = require('..')
 
-test('this is an example', assert => {
+
+test('should hook a function before', assert => {
   assert.plan(1)
-  assert.equal(1 + 2, 3)
+  const api = hook({
+    get(params) {
+      return params
+    }
+  }, {
+    get() {
+      return 'hello'
+    }
+  })
+  assert.equal(api.get(), 'hello')
 })
-
-  
