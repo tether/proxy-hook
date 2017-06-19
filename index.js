@@ -18,9 +18,8 @@ module.exports = function (obj, before, after) {
           }
           return cb.apply(this, args)
         }
-      } else {
-        return cb
       }
+      return cb
     }
   })
 }
