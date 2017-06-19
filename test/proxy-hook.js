@@ -22,7 +22,7 @@ test('should hook a function before', assert => {
 })
 
 
-test('should hook only an existing function', assert => {
+test('should only hook an existing function', assert => {
   assert.plan(1)
   const api = hook({
     get(params) {
@@ -34,4 +34,18 @@ test('should hook only an existing function', assert => {
     }
   })
   assert.equal(api.get('world'), 'world')
+})
+
+
+test('should not hook a property', assert => {
+  assert.plan(2)
+  const api = hook({
+    get: 'hello'
+  }, {
+    get() {
+      return 'world'
+    }
+  })
+  assert.equal(typeof api.get, 'string')
+  assert.equal(api.get, 'hello')
 })
