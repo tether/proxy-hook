@@ -11,8 +11,12 @@ module.exports = function (obj, before) {
       const cb = target[property]
       const hook = before[property]
       return (...args) => {
-        const result = hook.apply(this, args)
-        return cb(result)
+        if (typeof hook === 'function') {
+          const result = hook.apply(this, args)
+          return cb(result)
+        } else {
+          return cb.apply(this, args)
+        }
       }
     }
   })
