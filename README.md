@@ -9,6 +9,8 @@ Proxy an object functions with before and after hook functions.
 
 ## Usage
 
+Here's a simple example on how to define a before hook:
+
 ```js
 const hook = require('proxy-hook')
 
@@ -25,7 +27,7 @@ var api = hook({
   get(name) {
     return db[name]
   }
-})
+}, /* after hook */)
 
 api.get('foo')
 // => 10
