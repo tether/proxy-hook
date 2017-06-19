@@ -5,19 +5,18 @@
  * @api public
  */
 
-module.exports = function (obj, before) {
+module.exports = function (obj, before, after) {
   return new Proxy(obj, {
     get(target, property, receiver) {
       const cb = target[property]
-      const hook = before[property]
+      const beforeHook = before[property]
+      //const afterHook = after[property]
       if (typeof cb === 'function') {
         return (...args) => {
-          if (typeof hook === 'function') {
-            const result = hook.apply(this, args)
-            return cb(result)
-          } else {
-            return cb.apply(this, args)
+          if (typeof beforeHook === 'function') {
+            args = [beforeHook.apply(this, args)]
           }
+          return cb.apply(this, args)
         }
       } else {
         return cb
