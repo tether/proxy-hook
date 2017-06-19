@@ -1,17 +1,34 @@
-
 # Proxy-Hook
 
-[![Build Status](https://travis-ci.org/petrofeed/proxy-hook.svg?branch=master)](https://travis-ci.org/petrofeed/proxy-hook)
+[![Build Status](https://travis-ci.org/tether/proxy-hook.svg?branch=master)](https://travis-ci.org/tether/proxy-hook)
 [![NPM](https://img.shields.io/npm/v/proxy-hook.svg)](https://www.npmjs.com/package/proxy-hook)
 [![Downloads](https://img.shields.io/npm/dm/proxy-hook.svg)](http://npm-stat.com/charts.html?package=proxy-hook)
 [![guidelines](https://tether.github.io/contribution-guide/badge-guidelines.svg)](https://github.com/tether/contribution-guide)
 
-This is a simple description.
+Proxy an object functions with before and after hook functions.
 
 ## Usage
 
 ```js
+const hook = require('proxy-hook')
 
+const db = {
+  'foo': 10
+}
+
+// before hook
+var api = hook({
+  get(id) {
+    return 'hello ' + id
+  },
+}, {
+  get(name) {
+    return db[name]
+  }
+})
+
+api.get('foo')
+// => 10
 ```
 
 ## Installation
@@ -30,9 +47,9 @@ For support, bug reports and or feature requests please make sure to read our
 
 ## Contribution
 
-The open source community is very important to us. If you want to participate to this repository, please make sure to read our <a href="https://github.com/tether/contribution-guide" target="_blank">guideline</a> before making any pull request. If you have any related project, please let everyone know in our wiki.
-## License
+The open source community is very important to us. If you want to participate to this repository, please make sure to read our <a href="https://github.com/tether/contribution-guide" target="_blank">guidelines</a> before making any pull request. If you have any related project, please let everyone know in our wiki.
 
+## License
 
 The MIT License (MIT)
 
@@ -43,5 +60,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-  
-  
